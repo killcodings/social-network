@@ -1,11 +1,18 @@
-import {rerenderEntireTree} from "../render";
+// import {rerenderEntireTree} from "../render";
+
+let rerenderEntireTree = () => {
+    console.log('State other');
+}
+
+
 
 let state = {
     profilePage: {
         posts: [
             {id: 1, message: 'kjghjg', likesCount: 12},
             {id: 2, message: 'jhgg', likesCount: 10}
-        ]
+        ],
+        newPostText: 'newPostText из state.js'
     },
     dialogsPage: {
         messages: [
@@ -23,16 +30,30 @@ let state = {
     }
 };
 
-export let addPost = (postMessage) => {
+export const addPost = (postMessage) => {
     let newPost = {
         id: 5,
-        message: postMessage,
+        message: state.profilePage.newPostText,
         likesCount: 0
     };
-    rerenderEntireTree(state);
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = ''
+    rerenderEntireTree(state);
+
 
     // console.log(state);
 }
+
+window.state = state;
+
+export const updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+}
+
+export const subscribe = (observer) => {
+    rerenderEntireTree = observer;  // observer - паттерн наблюдатель
+}
+
 
 export default state;
