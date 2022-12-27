@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import {addPost, updateNewPostText} from './redux/state';
+import {addPost, updateNewPostText} from './redux/store';
 
 
 // addPost('fdgfxfggfkhghgdhs');
